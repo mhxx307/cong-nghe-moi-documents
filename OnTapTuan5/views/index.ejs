@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home</title>
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+
+    <body>
+        <form action="/add" method="post" class="form-add" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="">Ma SP</label>
+                <input type="text" name="maSP" />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="">Ten SP</label>
+                <input type="text" name="tenSP" />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="">So luong</label>
+                <input type="number" name="soLuong" />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="">Image</label>
+                <input type="file" name="image" accept="image/*" />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
+                <% } %>
+            </div>
+
+            <button class="add-btn" type="submit">Add</button>
+        </form>
+
+        <h3>Products List</h3>
+
+        <% if (products.length > 0) { %>
+        <form action="/delete" method="post" class="form-delete">
+            <button class="delete-btn" type="submit">Delete</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ma sp</th>
+                        <th>Ten sp</th>
+                        <th>So luong</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.maSP %></td>
+                        <td><%= product.tenSP %></td>
+                        <td><%= product.soLuong %></td>
+                        <td>
+                            <% if (product.image) {%>
+                            <img src=" <%= product.image %>" alt="image" style="width: 60px; height: 60px" />
+                            <% } else { %>
+                            <img
+                                src="https://api.dicebear.com/7.x/avataaars/svg"
+                                alt="avatar"
+                                style="width: 60px; height: 60px"
+                            />
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="/edit">Edit</a>
+                            <input type="checkbox" name="<%= product.maSP %>" />
+                        </td>
+                    </tr>
+                    <% })%>
+                </tbody>
+            </table>
+        </form>
+        <% } else {%>
+        <h3>Ko co san pham</h3>
+        <% } %>
+    </body>
+</html>

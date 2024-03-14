@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <form action="/add" method="post" class="formAdd" enctype="multipart/form-data">
+            <input type="text" name="maSanPham" placeholder="ma san pham" />
+            <input type="text" name="tenSanPham" placeholder="ten san pham" />
+            <input type="number" name="soLuong" placeholder="so luong" />
+            <input type="file" name="image" accept="image/*" />
+            <button type="submit" class="btnAdd">Submit</button>
+        </form>
+
+        <form action="/delete" method="post" class="formDelete">
+            <button type="submit" class="btnDelete">Delete</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>maSanPham</th>
+                        <th>tenSanPham</th>
+                        <th>soLuong</th>
+                        <th>image</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.maSanPham %></td>
+                        <td><%= product.tenSanPham %></td>
+                        <td><%= product.soLuong %></td>
+                        <td><img src="<%= product.image %>" alt="" style="width: 20px; height: 20px" /></td>
+                        <td>
+                            <input type="checkbox" name="<%= product.maSanPham %>" id="<%= product.maSanPham %>" />
+                        </td>
+                    </tr>
+                    <% })%>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>
